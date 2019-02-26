@@ -32,7 +32,9 @@ public class UserControllerSpec {
     MongoClient mongoClient = new MongoClient();
     MongoDatabase db = mongoClient.getDatabase("test");
     MongoCollection<Document> userDocuments = db.getCollection("users");
-    userDocuments.drop();
+
+    userDocuments.drop(); // actually changes the database contents
+
     List<Document> testUsers = new ArrayList<>();
     testUsers.add(Document.parse("{\n" +
       "                    name: \"Chris\",\n" +
