@@ -70,8 +70,7 @@ public class TodoController {
 
     Document filterDoc = new Document();
 
-
-    /// Filter by owner
+    /// Grab owner
     if (queryParams.containsKey("owner")) {
       String targetContent = (queryParams.get("owner")[0]);
       Document contentRegQuery = new Document();
@@ -80,25 +79,32 @@ public class TodoController {
       filterDoc = filterDoc.append("owner", contentRegQuery);
     }
 
-    // Filter by body contents
+    // Grab body contents
     if (queryParams.containsKey("contains")) {
       String targetContent = (queryParams.get("contains")[0]);
       Document contentRegQuery = new Document();
       contentRegQuery.append("$regex", targetContent);
       contentRegQuery.append("$options", "i");
-      filterDoc = filterDoc.append("contains", contentRegQuery);
+      filterDoc = filterDoc.append("body", contentRegQuery);
     }
 
-    //    // Filter by category
-//    if (queryParams.containsKey("category")) {
-//      String targetContent = (queryParams.get("category")[0]);
-//      Document contentRegQuery = new Document();
-//      contentRegQuery.append("$regex", targetContent);
-//      contentRegQuery.append("$options", "i");
-//      filterDoc = filterDoc.append("category", contentRegQuery);
-//    }
+    // Grab status
+    if (queryParams.containsKey("status")) {
+      String targetContent = (queryParams.get("status")[0]);
+      boolean targetBool;
 
+      if (targetContent.toLowerCase().equals("incomplete")) {
+        targetBool = false;
+      }
+      else {
+        targetBool = true;
+      }
 
+      Document contentRegQuery = new Document();
+      contentRegQuery.append("$regex", targetBool);
+      contentRegQuery.append("$options", "i");
+      filterDoc = filterDoc.append("status", contentRegQuery);
+    }
 
     //FindIterable comes from mongo, Document comes from Gson
     FindIterable<Document> matchingTodos = todoCollection.find(filterDoc);
@@ -123,7 +129,7 @@ public class TodoController {
 
     Document newTodo = new Document();
     newTodo.append("owner", owner);
-    newTodo.append("status", status);
+    newTodo.append("status", convertStatus(status));
     newTodo.append("category", category);
     newTodo.append("body", body);
 
@@ -137,4 +143,14 @@ public class TodoController {
       return null;
     }
   }
+
+  //helper function
+  public boolean convertStatus(String status) {
+    if (status.equals("complete")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }
