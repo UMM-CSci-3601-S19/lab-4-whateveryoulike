@@ -78,6 +78,14 @@ public class TodoController {
       contentRegQuery.append("$options", "i");
       filterDoc = filterDoc.append("owner", contentRegQuery);
     }
+    // Filter by category
+    if (queryParams.containsKey("category")) {
+      String targetContent = (queryParams.get("category")[0]);
+      Document contentRegQuery = new Document();
+      contentRegQuery.append("$regex", targetContent);
+      contentRegQuery.append("$options", "i");
+      filterDoc = filterDoc.append("category", contentRegQuery);
+    }
 
     // Grab body contents
     if (queryParams.containsKey("contains")) {
@@ -92,12 +100,9 @@ public class TodoController {
     if (queryParams.containsKey("status")) {
       String targetContent = (queryParams.get("status")[0]);
       boolean targetBool;
-
-      targetBool = (targetContent.toLowerCase().equals("complete") || targetContent.toLowerCase().equals("true"));
-
+      targetBool = convertStatus(targetContent);
       Document contentRegQuery = new Document();
-      contentRegQuery.append("$regex", targetBool);
-      contentRegQuery.append("$options", "i");
+      contentRegQuery.append("$eq", targetBool);
       filterDoc = filterDoc.append("status", contentRegQuery);
     }
 
