@@ -1,9 +1,14 @@
 package umm3601;
 
 import com.mongodb.MongoClient;
+
+
 import com.mongodb.client.MongoDatabase;
+
 import spark.Request;
 import spark.Response;
+import umm3601.todo.TodoController;
+import umm3601.todo.TodoRequestHandler;
 import umm3601.user.UserController;
 import umm3601.user.UserRequestHandler;
 
@@ -18,13 +23,14 @@ public class Server {
   public static void main(String[] args) {
 
     MongoClient mongoClient = new MongoClient();
+    MongoClient mongoClientTodo = new MongoClient();
     MongoDatabase userDatabase = mongoClient.getDatabase(userDatabaseName);
-    MongoDatabase todoDatabase = mongoClient.getDatabase(todoDatabaseName);
+    MongoDatabase todoDatabase = mongoClientTodo.getDatabase(todoDatabaseName);
 
     UserController userController = new UserController(userDatabase);
     UserRequestHandler userRequestHandler = new UserRequestHandler(userController);
 
-    TodoController todoController = new todoController(todoDatabase);
+    TodoController todoController = new TodoController(todoDatabase);
     TodoRequestHandler todoRequestHandler = new TodoRequestHandler(todoController);
 
     //Configure Spark
