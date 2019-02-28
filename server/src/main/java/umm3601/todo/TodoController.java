@@ -70,8 +70,7 @@ public class TodoController {
 
     Document filterDoc = new Document();
 
-
-    /// Filter by owner
+    /// Grab owner
     if (queryParams.containsKey("owner")) {
       String targetContent = (queryParams.get("owner")[0]);
       Document contentRegQuery = new Document();
@@ -80,13 +79,30 @@ public class TodoController {
       filterDoc = filterDoc.append("owner", contentRegQuery);
     }
 
-    // Filter by body contents
+    // Grab body contents
     if (queryParams.containsKey("contains")) {
       String targetContent = (queryParams.get("contains")[0]);
       Document contentRegQuery = new Document();
       contentRegQuery.append("$regex", targetContent);
       contentRegQuery.append("$options", "i");
-      filterDoc = filterDoc.append("contains", contentRegQuery);
+      filterDoc = filterDoc.append("body", contentRegQuery);
+    }
+
+    // Grab status
+    if (queryParams.containsKey("status")) {
+      String targetContent = (queryParams.get("status")[0]);
+
+      if (targetContent.toLowerCase().equals("incomplete")) {
+        targetContent = false;
+      }
+      if (targetContent.toLowerCase().equals("complete")) {
+        targetContent = true;
+      }
+
+      Document contentRegQuery = new Document();
+      contentRegQuery.append("$regex", targetContent);
+      contentRegQuery.append("$options", "i");
+      filterDoc = filterDoc.append("status", contentRegQuery);
     }
 
     //    // Filter by category
@@ -119,7 +135,7 @@ public class TodoController {
 
 
 
-  public String addNewTodo(String owner, String status, String category, String body) {
+  public String addNewTodo(String owner, boolean status, String category, String body) {
 
     Document newTodo = new Document();
     newTodo.append("owner", owner);
