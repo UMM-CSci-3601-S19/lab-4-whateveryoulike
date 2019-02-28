@@ -91,30 +91,20 @@ public class TodoController {
     // Grab status
     if (queryParams.containsKey("status")) {
       String targetContent = (queryParams.get("status")[0]);
+      boolean targetBool;
 
       if (targetContent.toLowerCase().equals("incomplete")) {
-        targetContent = false;
+        targetBool = false;
       }
-      if (targetContent.toLowerCase().equals("complete")) {
-        targetContent = true;
+      else {
+        targetBool = true;
       }
 
       Document contentRegQuery = new Document();
-      contentRegQuery.append("$regex", targetContent);
+      contentRegQuery.append("$regex", targetBool);
       contentRegQuery.append("$options", "i");
       filterDoc = filterDoc.append("status", contentRegQuery);
     }
-
-    //    // Filter by category
-//    if (queryParams.containsKey("category")) {
-//      String targetContent = (queryParams.get("category")[0]);
-//      Document contentRegQuery = new Document();
-//      contentRegQuery.append("$regex", targetContent);
-//      contentRegQuery.append("$options", "i");
-//      filterDoc = filterDoc.append("category", contentRegQuery);
-//    }
-
-
 
     //FindIterable comes from mongo, Document comes from Gson
     FindIterable<Document> matchingTodos = todoCollection.find(filterDoc);
@@ -135,11 +125,11 @@ public class TodoController {
 
 
 
-  public String addNewTodo(String owner, boolean status, String category, String body) {
+  public String addNewTodo(String owner, String status, String category, String body) {
 
     Document newTodo = new Document();
     newTodo.append("owner", owner);
-    newTodo.append("status", status);
+    newTodo.append("status", convertStatus(status));
     newTodo.append("category", category);
     newTodo.append("body", body);
 
@@ -153,4 +143,14 @@ public class TodoController {
       return null;
     }
   }
+
+  //helper function
+  public boolean convertStatus(String status) {
+    if (status.equals("complete")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }
