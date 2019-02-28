@@ -11,7 +11,7 @@ import spark.Response;
 /**
  * Created by Brian on 11/29/2017.
  */
-public class UserRequestHandler {
+public class TodoRequestHandler {
 
   private final TodoController todoController;
 
@@ -84,12 +84,7 @@ public class UserRequestHandler {
     String owner = newTodo.getString("owner");
     String category = newTodo.getString("category");
     String body = newTodo.getString("contains");
-    if (newTodo.getString("status").equals("incomplete")) {
-      boolean status = false;
-    }
-    else if (newTodo.getString("status").equals("complete")) {
-      boolean status = true;
-    }
+    String status = newTodo.getString("status");
 
     System.err.println("Adding new todo [owner=" + owner + ", status=" + status + " category=" + category + " body=" + body + ']');
     return todoController.addNewTodo(owner, status, category, body);
