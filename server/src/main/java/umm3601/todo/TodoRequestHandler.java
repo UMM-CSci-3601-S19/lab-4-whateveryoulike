@@ -83,8 +83,8 @@ public class TodoRequestHandler {
 
     String owner = newTodo.getString("owner");
     String category = newTodo.getString("category");
-    String body = newTodo.getString("contains");
-    String status = newTodo.getString("status");
+    String body = newTodo.getString("body");
+    String status = newTodo.getString("status"); //Make sure it is either true or false
 
     System.err.println("Adding new todo [owner=" + owner + ", status=" + status + " category=" + category + " body=" + body + ']');
     return todoController.addNewTodo(owner, status, category, body);

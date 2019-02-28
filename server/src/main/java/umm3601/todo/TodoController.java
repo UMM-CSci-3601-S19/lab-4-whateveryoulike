@@ -41,7 +41,7 @@ public class TodoController {
    * @return the desired user as a JSON object if the toodo with that ID is found,
    * and `null` if no toodo with that ID is found
    */
-  public String getTodo(String id) {
+  String getTodo(String id) {
     FindIterable<Document> jsonTodos
       = todoCollection
       .find(eq("_id", new ObjectId(id)));
@@ -66,7 +66,7 @@ public class TodoController {
    * @param queryParams the query parameters from the request
    * @return an array of Users in a JSON formatted string
    */
-  public String getTodos(Map<String, String[]> queryParams) {
+  String getTodos(Map<String, String[]> queryParams) {
 
     Document filterDoc = new Document();
 
@@ -93,12 +93,7 @@ public class TodoController {
       String targetContent = (queryParams.get("status")[0]);
       boolean targetBool;
 
-      if (targetContent.toLowerCase().equals("incomplete")) {
-        targetBool = false;
-      }
-      else {
-        targetBool = true;
-      }
+      targetBool = (targetContent.toLowerCase().equals("complete") || targetContent.toLowerCase().equals("true"));
 
       Document contentRegQuery = new Document();
       contentRegQuery.append("$regex", targetBool);
@@ -125,7 +120,7 @@ public class TodoController {
 
 
 
-  public String addNewTodo(String owner, String status, String category, String body) {
+  String addNewTodo(String owner, String status, String category, String body) {
 
     Document newTodo = new Document();
     newTodo.append("owner", owner);
@@ -145,12 +140,8 @@ public class TodoController {
   }
 
   //helper function
-  public boolean convertStatus(String status) {
-    if (status.equals("complete")) {
-      return true;
-    } else {
-      return false;
-    }
+  private boolean convertStatus(String status) {
+    return (status.toLowerCase().equals("complete") || status.toLowerCase().equals("true"));
   }
 
 }
