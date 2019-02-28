@@ -82,9 +82,14 @@ public class UserRequestHandler {
     Document newTodo = Document.parse(req.body());
 
     String owner = newTodo.getString("owner");
-    String status = newTodo.getInteger("status");
     String category = newTodo.getString("category");
-    String body = newTodo.getString("body");
+    String body = newTodo.getString("contains");
+    if (newTodo.getString("status").equals("incomplete")) {
+      boolean status = false;
+    }
+    else if (newTodo.getString("status").equals("complete")) {
+      boolean status = true;
+    }
 
     System.err.println("Adding new todo [owner=" + owner + ", status=" + status + " category=" + category + " body=" + body + ']');
     return todoController.addNewTodo(owner, status, category, body);
