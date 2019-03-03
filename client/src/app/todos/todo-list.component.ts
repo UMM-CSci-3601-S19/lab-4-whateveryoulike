@@ -19,7 +19,7 @@ export class TodoListComponent implements OnInit {
   // These are the target values used in searching.
   // We should rename them to make that clearer.
   public todoOwner: string;
-  public todoCategory: number;
+  public todoCategory: string;
   public todoBody: string;
   public todoStatus: string;
 
@@ -36,7 +36,7 @@ export class TodoListComponent implements OnInit {
   }
 
   openDialog(): void {
-    const newTodo: Todo = {_id: '', owner: '', status: '', category: '', body: ''};
+    const newTodo: Todo = {_id: '', owner: '', status: null, category: '', body: ''};
     const dialogRef = this.dialog.open(AddTodoComponent, {
       width: '500px',
       data: {todo: newTodo}
