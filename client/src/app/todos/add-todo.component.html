@@ -1,0 +1,54 @@
+
+<div class="add-todo">
+  <form [formGroup]="addTodoForm">
+    <h2 mat-dialog-title>New Todo</h2>
+    <mat-dialog-content layout="column">
+      <mat-form-field flex>
+        <input matInput #input id="bodyField" placeholder="Body" [(ngModel)]="data.todo.body" formControlName="body"
+               required>
+        <mat-error *ngFor="let validation of add_todo_validation_messages.body">
+          <mat-error class="error-message" id="body-error"
+                     *ngIf="addTodoForm.get('body').hasError(validation.type) && (addUserForm.get('body').dirty || addUserForm.get('body').touched)">
+            {{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+      <!--
+      <mat-form-field flex>
+        <input matInput #input id="statusField" type="checkbox"  [(ngModel)]="data.todo.status"
+               formControlName="status">
+        Complete
+      </mat-form-field>
+      -->
+      <mat-form-field flex>
+        <input matInput #input id="ownerField" placeholder="Owner" [(ngModel)]="data.todo.owner"
+               formControlName="owner">
+        <mat-error *ngFor="let validation of add_todo_validation_messages.owner">
+          <mat-error class="error-message" id="owner-error"
+                     *ngIf="addTodoForm.get('owner').hasError(validation.type) && (addUserForm.get('owner').dirty || addUserForm.get('owner').touched)">
+            {{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field flex>
+        <input matInput #input id="categoryField" placeholder="Category" [(ngModel)]="data.todo.category"
+               formControlName="category">
+        <mat-error *ngFor="let validation of add_todo_validation_messages.category">
+          <mat-error class="error-message" id='category-error'
+                     *ngIf="addUserForm.get('category').hasError(validation.type) && (addUserForm.get('category').dirty || addUserForm.get('category').touched)">
+            {{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions layout="row">
+      <!-- [mat-dialog-close]="data.user" causes the data.user object to be returned when the dialog is closed. -->
+      <button mat-raised-button id="confirmAddTodoButton" [mat-dialog-close]="data.todo" type="button" color="primary"
+              [disabled]="!addTodoForm.valid">Add Todo
+      </button>
+      <!-- [mat-dialog-close]="null" causes null to be returned when the dialog is closed. -->
+      <button mat-raised-button id="exitWithoutAddingButton" [mat-dialog-close]="null" type="button">Cancel</button>
+    </mat-dialog-actions>
+  </form>
+</div>
+
