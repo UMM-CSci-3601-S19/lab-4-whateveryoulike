@@ -7,8 +7,7 @@ import {AddTodoComponent} from './add-todo.component';
 
 @Component({
   selector: 'todo-list-component',
-  templateUrl: 'todo-list.component.html',
-  styleUrls: ['./todo-list.component.css'],
+  templateUrl: 'todo-list.component.html'
 })
 
 export class TodoListComponent implements OnInit {
@@ -19,7 +18,7 @@ export class TodoListComponent implements OnInit {
   // These are the target values used in searching.
   // We should rename them to make that clearer.
   public todoOwner: string;
-  public todoCategory: number;
+  public todoCategory: string;
   public todoBody: string;
   public todoStatus: string;
 
@@ -36,7 +35,7 @@ export class TodoListComponent implements OnInit {
   }
 
   openDialog(): void {
-    const newTodo: Todo = {_id: '', owner: '', status: '', category: '', body: ''};
+    const newTodo: Todo = {_id: '', owner: '', status: false, category: '', body: ''};
     const dialogRef = this.dialog.open(AddTodoComponent, {
       width: '500px',
       data: {todo: newTodo}
