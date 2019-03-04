@@ -59,13 +59,13 @@ describe('Todo component', () => {
   it('can retrieve Layne by ID', () => {
     todoComponent.setId('layne_id');
     expect(todoComponent.todo).toBeDefined();
-    expect(todoComponent.todo.owner).toBe('Laayne');
+    expect(todoComponent.todo.owner).toBe('Layne');
     expect(todoComponent.todo.body).toBe('Here they come to snuff the rooster');
   });
 
   it('returns undefined for Scott', () => {
     todoComponent.setId('Scott');
-    expect(todoComponent.todo.owner).not.toBeDefined();
+    expect(todoComponent.todo).not.toBeDefined();
   });
 
 });
