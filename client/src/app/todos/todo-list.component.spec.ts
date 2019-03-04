@@ -118,7 +118,7 @@ describe('Todo list', () => {
     });
     todoList.todoStatus = "";
     todoList.refreshTodos().subscribe(() => {
-      expect(todoList.filteredTodos.length).toBe(2);
+      expect(todoList.filteredTodos.length).toBe(3);
     });
 
   });
