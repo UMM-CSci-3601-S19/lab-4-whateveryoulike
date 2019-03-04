@@ -39,7 +39,7 @@ export class AddTodoComponent implements OnInit {
 
   createForms() {
 
-    // add user form validations
+    // add todo form validations
     this.addTodoForm = this.fb.group({
       body: new FormControl('body', Validators.compose([
         Validators.minLength(2),
@@ -47,8 +47,14 @@ export class AddTodoComponent implements OnInit {
         Validators.pattern('^[A-Za-z0-9\\s]+[A-Za-z0-9\\s]+$(\\.0-9+)?'),
         Validators.required
       ])),
+
+      status: new FormControl('status', Validators.compose([
+        Validators.minLength(2),
+        Validators.maxLength(140),
+        Validators.pattern('^[A-Za-z0-9\\s]+[A-Za-z0-9\\s]+$(\\.0-9+)?'),
+        Validators.required
+      ])),
       //No validation needed
-      status: new FormControl('status'),
 
       owner: new FormControl('owner', Validators.compose([
         Validators.required,
