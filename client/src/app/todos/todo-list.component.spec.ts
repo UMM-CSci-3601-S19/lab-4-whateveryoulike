@@ -172,7 +172,7 @@ describe('Todo list', () => {
       expect(todoList.filteredTodos.length).toBe(3);
     });
 
-    // Should give us Kurt and Layne, who's statuses equal false.
+    // Should give us Kurt and Layne, who's statuses are false.
     todoList.todoStatus = "incomplete";
     todoList.refreshTodos().subscribe(() => {
       expect(todoList.filteredTodos.length).toBe(2);
@@ -214,6 +214,13 @@ describe('Todo list', () => {
     todoList.todoStatus = null;
     todoList.refreshTodos().subscribe(() => {
       expect(todoList.filteredTodos.length).toBe(2);
+    });
+
+    // Now we have everyone once again.
+    todoList.todoBody = '';
+    todoList.todoCategory = '';
+    todoList.refreshTodos().subscribe(() => {
+      expect(todoList.filteredTodos.length).toBe(3);
     });
 
   });
