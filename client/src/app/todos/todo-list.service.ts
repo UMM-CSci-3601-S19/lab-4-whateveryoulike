@@ -20,9 +20,9 @@ export class TodoListService {
     return this.http.get<Todo[]>(this.todoUrl);
   }
 
-  // getTodoById(id: string): Observable<Todo> {
-  //   return this.http.get<Todo>(this.todoUrl + '/' + id);
-  // }
+  getTodoById(id: string): Observable<Todo> {
+    return this.http.get<Todo>(this.todoUrl + '/' + id);
+  }
 
   /*
   //This method looks lovely and is more compact, but it does not clear previous searches appropriately.
