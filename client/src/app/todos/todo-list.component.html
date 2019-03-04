@@ -38,7 +38,7 @@
           <mat-expansion-panel #elem class="todos" [id]="todo._id" [expanded]="this.isHighlighted(todo)"
                                *ngFor="let todo of this.filterTodos(todoOwner, todoStatus, todoBody, todoCategory)">
             <mat-expansion-panel-header>
-              <mat-panel-title matTooltip="id: {{todo._id}}"> </mat-panel-title>
+              <mat-panel-title matTooltip="id: {{todo._id['$oid']}}">{{todo.owner}}</mat-panel-title>
 
             </mat-expansion-panel-header>
             <mat-panel-description>Owner: {{todo.owner}}</mat-panel-description>
