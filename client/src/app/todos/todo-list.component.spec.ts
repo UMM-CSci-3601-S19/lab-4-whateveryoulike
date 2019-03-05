@@ -82,6 +82,8 @@ describe('Todo list', () => {
     expect(todoList.todos.filter((todo: Todo) => todo.category === "stuff").length).toBe(2);
   });
 
+  /*
+  This is now done on the backend.
   it('todo list filters by owner', () => {
     expect(todoList.filteredTodos.length).toBe(3);
     todoList.todoOwner = 'r';
@@ -101,6 +103,7 @@ describe('Todo list', () => {
       expect(todoList.filteredTodos.length).toBe(3);
     });
   });
+  */
 
   it('todo list filters by status', () => {
     expect(todoList.filteredTodos.length).toBe(3);
@@ -163,7 +166,7 @@ describe('Todo list', () => {
     });
   });
 
-  it('todo list filters by body, category, owner, and status', () => {
+  it('todo list filters by body, category, and status', () => {
     expect(todoList.filteredTodos.length).toBe(3);
 
     // Should give us Kurt, Layne, and Chris
@@ -178,16 +181,11 @@ describe('Todo list', () => {
       expect(todoList.filteredTodos.length).toBe(2);
     });
 
-    // Should narrow it down to Kurt
-    todoList.todoOwner = 'r';
-    todoList.refreshTodos().subscribe(() => {
-      expect(todoList.filteredTodos.length).toBe(1);
-    });
 
-    // Should still be just Kurt
+    // Should just be Kurt's
     todoList.todoCategory = 'stuff';
     todoList.refreshTodos().subscribe(() => {
-      expect(todoList.filteredTodos.length).toBe(1);
+      expect(todoList.filteredTodos.length).toBe(2);
     });
 
     // This should make the list empty
@@ -197,7 +195,6 @@ describe('Todo list', () => {
     });
 
     // This should give us Scott
-    todoList.todoOwner = '';
     todoList.todoCategory = 'things';
     todoList.refreshTodos().subscribe(() => {
       expect(todoList.filteredTodos.length).toBe(1);
