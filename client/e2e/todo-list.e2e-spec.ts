@@ -37,10 +37,11 @@ describe('Todo list', () => {
 
   it('should type something in filter by owner box make sure the elements are correct', () => {
     page.navigateTo();
-    page.typeOwner('t');
-    expect(page.getUniqueTodo('58af3a600343927e48e87216')).toEqual('Blanche');
-    expect(page.getUniqueTodo('58af3a600343927e48e8721c')).toEqual('Barry');
-    expect(page.getUniqueTodo('58af3a600343927e48e87220')).toEqual('Roberta');
+    page.typeOwner('b');
+    page.submit();
+    expect(page.elementExistsWithId("58af3a600343927e48e87216")).toBe(true);
+    expect(page.elementExistsWithId("58af3a600343927e48e8721c")).toBe(true);
+    expect(page.elementExistsWithId("58af3a600343927e48e87217")).toBe(false);
 
     page.backspace();
     page.typeOwner('r');
@@ -58,7 +59,7 @@ describe('Todo list', () => {
     expect(page.elementExistsWithClass('todos')).toBeFalsy("I think this should fail?")
 
   });
-
+  /*
   it('should click on the age 27 times and return 3 elements then ', () => {
     page.navigateTo();
     page.getUserByAge();
@@ -124,6 +125,7 @@ describe('Todo list', () => {
     });
   });
 
+
 // For examples testing modal dialog related things, see:
 // https://code.tutsplus.com/tutorials/getting-started-with-end-to-end-testing-in-angular-using-protractor--cms-29318
 // https://github.com/blizzerand/angular-protractor-demo/tree/final
@@ -166,6 +168,7 @@ describe('Todo list', () => {
        * and then for the client to display this new user.
        * http://www.protractortest.org/#/api?view=ProtractorExpectedConditions
        */
+  /*
       const tracy_element = element(by.id('tracy@awesome.com'));
       browser.wait(protractor.ExpectedConditions.presenceOf(tracy_element), 10000);
 
@@ -249,8 +252,10 @@ describe('Todo list', () => {
         //clicking somewhere else will make the error appear
         page.field('nameField').click();
         expect(page.getTextFromField('email-error')).toBe('Email must be formatted properly');
+
       });
     });
   });
+  */
 });
 

@@ -20,6 +20,9 @@ export class TodoPage {
     return browser.executeScript(setStyle, element(byObject).getWebElement(), 'color: red; background-color: yellow;');
   }
 
+  submit() {
+    this.click('submit');
+  }
   getTodoTitle() {
     const title = element(by.id('todo-list-title')).getText();
     this.highlightElement(by.id('todo-list-title'));
@@ -71,13 +74,26 @@ export class TodoPage {
     return element.all(by.className('todos'));
   }
 
+
+  /*
+    Intellij has determined
+    this space forbidden
+
+    any attempts to code
+    in the forbidden space
+    will result in compile errors
+
+
+
+
+  (and death)
+  */
   getUniqueTodo(id: string) {
-    const user = element(by.id(_id)).getText();
-    this.highlightElement(by.id(_id));
+    const todo = element(by.id(id)).getText();
+    this.highlightElement(by.id(id));
 
     return todo;
   }
-
   elementExistsWithId(idOfElement: string): promise.Promise<boolean> {
     if (element(by.id(idOfElement)).isPresent()) {
       this.highlightElement(by.id(idOfElement));
