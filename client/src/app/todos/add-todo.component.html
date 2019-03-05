@@ -43,10 +43,10 @@
       </mat-form-field>
 
         <mat-radio-group flex id="statusField" placeholder="Incomplete" [(ngModel)]="data.todo.status" formControlName="status">
-          <mat-radio-button value="Complete">
+          <mat-radio-button id="completeButton" value="Complete">
             Complete
           </mat-radio-button>
-          <mat-radio-button value="Incomplete">
+          <mat-radio-button id="incompleteButton" value="Incomplete">
             Incomplete
           </mat-radio-button>
           <mat-error *ngFor="let validation of add_todo_validation_messages.status">

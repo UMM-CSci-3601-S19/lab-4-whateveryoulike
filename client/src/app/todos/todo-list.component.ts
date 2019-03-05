@@ -100,6 +100,7 @@ export class TodoListComponent implements OnInit {
     return this.filteredTodos;
   }
 
+
   /**
    * Starts an asynchronous operation to update the users list
    *

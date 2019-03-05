@@ -95,10 +95,7 @@ export class TodoPage {
     return todo;
   }
   elementExistsWithId(idOfElement: string): promise.Promise<boolean> {
-    if (element(by.id(idOfElement)).isPresent()) {
-      this.highlightElement(by.id(idOfElement));
-    }
-    return element(by.id(idOfElement)).isPresent();
+    return element((by.id(idOfElement))).isPresent();
   }
 
   // This is a custom method written to check for certain element classes present
@@ -132,4 +129,7 @@ export class TodoPage {
     return element(by.id(idOfField)).getText();
   }
 
+  getNumberWithClass(fieldClass: string){
+    return (element.all(by.css('.' + fieldClass))).count()
+  }
 }
