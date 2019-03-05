@@ -41,7 +41,7 @@
                                *ngFor="let todo of this.filterTodos(todoStatus, todoBody, todoCategory)">
             <mat-expansion-panel-header>
 
-              <mat-panel-title id="todo._id" matTooltip="id: {{todo._id['$oid']}}"
+              <mat-panel-title id="{{todo._id['$oid']}}" matTooltip="id: {{todo._id['$oid']}}"
                                [ngClass] = "{
               'complete' : todo.status === true,
               'incomplete' : todo.status === false

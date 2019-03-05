@@ -4,8 +4,6 @@ import {User} from './user';
 import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
 import {AddUserComponent} from './add-user.component';
-import {AddTodoComponent} from '../todos/add-todo.component';
-import {Todo} from '../todos/todo';
 
 @Component({
   selector: 'user-list-component',
@@ -61,20 +59,6 @@ export class UserListComponent implements OnInit {
 
   }
 
-  openTodoDialog(): void {
-    const newTodo: Todo = {_id: '', owner: '', status: false, body: '', category: ''};
-    const dialogRef = this.dialog.open(AddTodoComponent, {
-      width: '500px',
-      data: {todo: newTodo}
-    });
-    dialogRef.afterClosed().subscribe(newUser => {
-      if (newTodo != null) {
-        console.log("new todo is not null!")
-      }else{
-        console.log("new todo is null!")
-      }
-    });
-  }
 
   public filterUsers(searchName: string, searchAge: number): User[] {
 

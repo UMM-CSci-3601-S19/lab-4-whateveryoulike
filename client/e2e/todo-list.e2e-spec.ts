@@ -16,7 +16,7 @@ browser.driver.controlFlow().execute = function () {
   // If you're tired of it taking long you can remove this call or change the delay
   // to something smaller (even 0).
   origFn.call(browser.driver.controlFlow(), () => {
-    return protractor.promise.delayed(0);
+    return protractor.promise.delayed(100);
   });
 
   return origFn.apply(browser.driver.controlFlow(), args);
@@ -43,7 +43,7 @@ describe('Todo list', () => {
     expect(page.elementExistsWithId("58af3a600343927e48e8721c")).toBeTruthy();
     expect(page.elementExistsWithId("58af3a600343927e48e87217")).toBeFalsy();
   });
-  it('filters todos by body and category', () => {
+  it('filters todos by status, body and category', () => {
     page.navigateTo();
     page.typeCategory('software');
     expect(page.elementExistsWithId("58af3a600343927e48e87212")).toBe(true);
@@ -52,20 +52,17 @@ describe('Todo list', () => {
     page.typeBody('ini');
     expect(page.elementExistsWithId("58af3a600343927e48e87212")).toBe(false);
     expect(page.elementExistsWithId("58af3a600343927e48e87266")).toBe(true);
+
+    page.typeStatus('complete');
+    expect(page.elementExistsWithId("58af3a600343927e48e87225")).toBe(false);
+    expect(page.elementExistsWithId("58af3a600343927e48e8722a")).toBe(true);
   });
-  it('adds new todos', () => {
-    let numTodos = page.getNumberWithClass("todos");
-    numTodos.then(n => {
-      page.click("addNewTodo");
-      element(by.id("bodyField")).sendKeys("this is a test body");
-      element(by.id("ownerField")).sendKeys("theTestOwner");
-      element(by.id("categoryField")).sendKeys("fakenews");
-      page.click("completeButton");
-      page.click("confirmAddTodoButton");
-    });
+
+  it('add new todos Button exists', () => {
+    expect(page.elementExistsWithId("addNewTodo")).toBe(true);
   });
     /*
-    console.log(numTodos);
+    console.log(nu/home/tenor031/Documents/Software D/lab-4-whateveryoulikemTodos);
     numTodos.then(a => {
       console.log(": " + a)
       }
