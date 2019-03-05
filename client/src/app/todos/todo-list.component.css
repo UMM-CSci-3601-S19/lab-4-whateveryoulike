@@ -1,0 +1,15 @@
+.complete {
+  color: green;
+}
+
+.incomplete {
+  color: red;
+}
+
+.inIcon {
+  content: "fingerprint";
+}
+
+.comIcon {
+  content: "build"
+}
