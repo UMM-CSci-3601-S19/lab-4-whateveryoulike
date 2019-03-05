@@ -43,6 +43,7 @@ export class AddUserComponent implements OnInit {
 
     // add user form validations
     this.addUserForm = this.fb.group({
+
       // We allow alphanumeric input and limit the length for name.
       name: new FormControl('name', Validators.compose([
         NameValidator.validName,

@@ -43,6 +43,7 @@ export class AddTodoComponent implements OnInit {
 
     // add todo form validations
     this.addTodoForm = this.fb.group({
+
       body: new FormControl('body', Validators.compose([
         Validators.minLength(2),
         Validators.maxLength(140),
