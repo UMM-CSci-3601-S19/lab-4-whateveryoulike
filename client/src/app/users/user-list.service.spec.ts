@@ -83,6 +83,7 @@ describe('User list service: ', () => {
     req.flush(testUsers);
   });
 
+
   it('getUsers(userCompany) adds appropriate param string to called URL', () => {
     userListService.getUsers('m').subscribe(
       users => expect(users).toEqual(mUsers)
