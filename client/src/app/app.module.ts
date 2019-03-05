@@ -12,6 +12,7 @@ import {UserListComponent} from './users/user-list.component';
 import {UserListService} from './users/user-list.service';
 import {Routing} from './app.routes';
 import {APP_BASE_HREF} from '@angular/common';
+import {MatRadioModule} from '@angular/material/radio';
 
 import {CustomModule} from './custom.module';
 import {AddUserComponent} from './users/add-user.component';
@@ -25,6 +26,7 @@ import {TodoListService} from './todos/todo-list.service';
   imports: [
     BrowserModule,
     HttpClientModule,
+    MatRadioModule,
     Routing,
     CustomModule,
   ],

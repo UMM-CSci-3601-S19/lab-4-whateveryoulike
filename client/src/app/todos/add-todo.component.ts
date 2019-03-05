@@ -33,7 +33,9 @@ export class AddTodoComponent implements OnInit {
       {type: 'minlength', message: 'Category must be at least 2 characters long'},
       {type: 'maxlength', message: 'Category cannot be more than 60 characters long'},
       {type: 'pattern', message: 'Category must contain only letters and numbers'}
-
+    ],
+    'status': [
+      {type: 'required', message: 'Status is required'}
     ]
   };
 
@@ -49,12 +51,8 @@ export class AddTodoComponent implements OnInit {
       ])),
 
       status: new FormControl('status', Validators.compose([
-        Validators.minLength(2),
-        Validators.maxLength(140),
-        Validators.pattern('^[A-Za-z0-9\\s]+[A-Za-z0-9\\s]+$(\\.0-9+)?'),
         Validators.required
       ])),
-      //No validation needed
 
       owner: new FormControl('owner', Validators.compose([
         Validators.required,
